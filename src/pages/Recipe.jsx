@@ -2,7 +2,7 @@ import {Link, useParams} from 'react-router-dom'
 import { useFetch } from '../hooks/useFetch'
 function Recipe() {
   const {id} = useParams()
-  const url = 'http://localhost:3000/recipes/' + id;
+  const url = 'https://irradiated-fierce-card.glitch.me/recipes/' + id;
   const {data:recipe, isPending, error} = useFetch(url);
   
   return (

@@ -7,7 +7,7 @@ function RecipeList({ recipes }) {
       {recipes.map((recipe) => {
         const {id, title, method, cookingTime, img} = recipe
         return(
-          <li className="card max-w-full bg-base-100 shadow-xl">
+          <li key={id} className="card max-w-full bg-base-100 shadow-xl">
             <figure><img  
             src={img}
             alt={title}
@@ -16,7 +16,7 @@ function RecipeList({ recipes }) {
             <div className="card-body">
               <h2 className="card-title">{title}</h2>
               <p>{method.substring(0, 70)}...</p>
-              <p className='text-red-500 text-primary'><span className='text-gray-600 font-bold'>Cooking Time:</span> {cookingTime}</p>
+              <p className='text-red-500'><span className='text-gray-600 font-bold'>Cooking Time:</span> {cookingTime}</p>
               <Link to={`/recipe/${id}`} className="btn btn-outline btn-accent">Read More</Link>
             </div>
           </li>

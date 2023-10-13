@@ -3,7 +3,7 @@ import RecipeList from '../components/RecipeList';
 import { useFetch } from '../hooks/useFetch';
 
 function Home() {
-    const {data:recipes, isPending, error} = useFetch('http://localhost:3000/recipes')
+    const {data:recipes, isPending, error} = useFetch('https://irradiated-fierce-card.glitch.me/recipes')
     return (
     <>
         {recipes && <RecipeList recipes={recipes}/>}

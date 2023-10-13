@@ -1,14 +1,25 @@
 import {useState, useEffect} from 'react'
-export function useFetch(url) {
+export function useFetch(url, method = "GET") {
     const [data, setData] = useState(null)
     const [isPending, setIsPending] = useState(false)
     const [error, setError] = useState(null)
+    const [postData, setPostData] = useState(null)
+
+    const getNewRecipe = (newRecipe) => {
+        setPostData({
+            method: method,
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newRecipe),
+        });
+    };
     
     useEffect(() => {
         setIsPending(true)
-       const getData = async () => {
+       const getData = async (fetchHeaders) => {
         try {
-            const req = await fetch(url);
+            const req = await fetch(url, {...fetchHeaders});
             if(!req.ok){
                 throw new Error(req.statusText);
             }
@@ -22,7 +33,19 @@ export function useFetch(url) {
         }
        }
 
-       getData();
-    }, [url])
-    return {data, isPending, error}
+       if(method == 'POST' && postData) {
+        getData(postData)
+       }
+
+       if (method == 'GET') {
+        getData()
+       }
+
+    }, [url, method, postData])
+    return {data, isPending, error, getNewRecipe}
 }
+
+
+
+
+ 
